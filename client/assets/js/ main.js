@@ -104,8 +104,6 @@ function calculate(num1, num2, operator) {
 }
 
 function decimalButtonHandler() {
-  // console.log(displayArray);
-  // var lastInput = displayArray[displayArray.length-1];
 
   var inputtedDecimal = $(event.currentTarget).find('p').text();
   stringNumberToPush += inputtedDecimal;
