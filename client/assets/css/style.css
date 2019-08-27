@@ -28,6 +28,7 @@ body * {
     width: 85%;
     background-color: peachpuff;
     left: 7.5%;
+    overflow: scroll;
 }
 
 .c-button-containers {

@@ -18,6 +18,13 @@ function applyClickHandlers() {
   $('#operator-column').on('click', '.operator', operatorButtonHandler);
 
   $('#equals').click(equalsButtonHandler);
+
+  $('#decimal').click(decimalButtonHandler);
+
+  $('#c-button').click(clearButtonHandler);
+
+  $('#ac-button').click(allClearButtonHandler);
+
 }
 
 function numberButtonHandler(event) {
@@ -35,10 +42,15 @@ function operatorButtonHandler(event) {
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  calculationArray.push(stringNumberToPush);
+  if (calculationResult !== null) {
+    calculationArray.push(calculationResult);
+  } else {
+    calculationArray.push(stringNumberToPush);
+  }
   calculationArray.push(inputtedOperator);
 
   stringNumberToPush = '';
+  console.log(calculationArray);
 }
 
 function equalsButtonHandler(event) {
@@ -47,10 +59,17 @@ function equalsButtonHandler(event) {
   stringNumberToPush = '';
   displayArray = [];
 
-  answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
+
+
+
+  if (calculationResult !== null) {
+    answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
+  } else {
+    answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
+  }
   displayArray.push(answer);
   updateDisplay();
-
+  calculationArray = [];
 }
 
 function updateDisplay() {
@@ -80,5 +99,31 @@ function calculate(num1, num2, operator) {
     default:
       console.log('I can\'t compute this!')
   }
+  calculationResult = result;
   return result;
+}
+
+function decimalButtonHandler() {
+  // console.log(displayArray);
+  // var lastInput = displayArray[displayArray.length-1];
+
+  var inputtedDecimal = $(event.currentTarget).find('p').text();
+  stringNumberToPush += inputtedDecimal;
+  displayArray.push(inputtedDecimal);
+  updateDisplay();
+
+}
+
+
+function clearButtonHandler() {
+  displayArray = [];
+  calculationArray = [];
+  updateDisplay();
+}
+
+function allClearButtonHandler() {
+  displayArray = [];
+  calculationArray = [];
+  calculationResult = null;
+  updateDisplay();
 }
