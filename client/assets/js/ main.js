@@ -30,8 +30,13 @@ function applyClickHandlers() {
 function numberButtonHandler(event) {
   var inputtedNumber = '';
   inputtedNumber = $(event.currentTarget).find('p').text();
-  stringNumberToPush += inputtedNumber;
 
+  if (calculationResult !== null) {
+    calculationResult = null;
+    displayArray=[];
+  }
+  
+  stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
   updateDisplay();
 }
@@ -67,6 +72,7 @@ function equalsButtonHandler(event) {
   } else {
     answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
   }
+
   displayArray.push(answer);
   updateDisplay();
   calculationArray = [];
@@ -78,12 +84,15 @@ function updateDisplay() {
   $('#display-text').text(displayText);
 }
 
-function calculate(num1, num2, operator) {
+function calculate(num1, num2, operator=0) {
   var number1 = parseFloat(num1);
   var number2 = parseFloat(num2);
   var result = null;
 
   switch (operator) {
+    case 0:
+      result = number1;
+      break;
     case '+':
       result = number1 + number2;
       break;
@@ -97,8 +106,14 @@ function calculate(num1, num2, operator) {
       result = number1 / number2;
       break;
     default:
-      console.log('I can\'t compute this!')
+      console.log(`I can't compute this!`)
+      break;
   }
+
+  if (isNaN(result)) {
+    result = number1;
+  }
+
   calculationResult = result;
   return result;
 }
