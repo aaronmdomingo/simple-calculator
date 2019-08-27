@@ -5,6 +5,7 @@ var calculationArray = [];
 var displayArray = [];
 var stringNumberToPush = '';
 var calculationResult = null;
+var hasDecimal = false;
 
 function initializeApp() {
   $('.center').css('pointer-events', 'none'); //For testing only
@@ -43,9 +44,11 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
+  hasDecimal = false;
   inputtedOperator = $(event.currentTarget).find('p').text();
   displayArray.push(inputtedOperator);
   updateDisplay();
+
 
   if (calculationResult !== null) {
     calculationArray.push(calculationResult);
@@ -60,17 +63,17 @@ function operatorButtonHandler(event) {
 
 function equalsButtonHandler(event) {
   var answer = null;
+  hasDecimal = false;
   calculationArray.push(stringNumberToPush);
   stringNumberToPush = '';
   displayArray = [];
 
 
 
-
   if (calculationResult !== null) {
-    answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
+    answer = calculate(calculationResult[0], calculationArray[calculationArray.length-1], calculationArray[calculationArray.length-2]);
   } else {
-    answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
+    answer = calculate(calculationArray[0], calculationArray[calculationArray.length-1], calculationArray[calculationArray.length - 2]);
   }
 
   displayArray.push(answer);
@@ -124,11 +127,15 @@ function calculate(num1, num2, operator=0) {
 
 function decimalButtonHandler() {
 
-  var inputtedDecimal = $(event.currentTarget).find('p').text();
-  stringNumberToPush += inputtedDecimal;
-  displayArray.push(inputtedDecimal);
-  updateDisplay();
+  if (!hasDecimal) {
+    var inputtedDecimal = $(event.currentTarget).find('p').text();
+    stringNumberToPush += inputtedDecimal;
+    displayArray.push(inputtedDecimal);
 
+    console.log(stringNumberToPush);
+    updateDisplay();
+    hasDecimal = true;
+  }
 }
 
 
@@ -136,6 +143,7 @@ function clearButtonHandler() {
   displayArray = [];
   calculationArray = [];
   updateDisplay();
+  hasDecimal = false;
 }
 
 function allClearButtonHandler() {
@@ -143,4 +151,5 @@ function allClearButtonHandler() {
   calculationArray = [];
   calculationResult = null;
   updateDisplay();
+  hasDecimal = false;
 }
