@@ -35,7 +35,7 @@ function numberButtonHandler(event) {
     calculationResult = null;
     displayArray=[];
   }
-  
+
   stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
   updateDisplay();
@@ -112,6 +112,10 @@ function calculate(num1, num2, operator=0) {
 
   if (isNaN(result)) {
     result = number1;
+  }
+
+  if (result === Infinity) {
+    result = 'Error';
   }
 
   calculationResult = result;
