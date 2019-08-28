@@ -6,7 +6,6 @@ var displayArray = [];
 var stringNumberToPush = '';
 var calculationResult = null;
 var hasDecimal = false;
-var hasOperator = false;
 var operatorList = '/+-*';
 
 function initializeApp() {
@@ -39,23 +38,21 @@ function numberButtonHandler(event) {
     displayArray=[];
   }
 
-  hasOperator = false;
   stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
   updateDisplay();
 }
 
 function operatorButtonHandler(event) {
+  var inputtedOperator = '';
 
   if (operatorList.includes(displayArray[displayArray.length-1])) {
     displayArray.splice(displayArray.length-1, 1);
   }
-  var inputtedOperator = '';
+
   inputtedOperator = $(event.currentTarget).find('p').text();
   displayArray.push(inputtedOperator);
   updateDisplay();
-  console.log('display array', displayArray);
-
 
   if (calculationResult !== null) {
     calculationArray.push(calculationResult);
@@ -63,41 +60,34 @@ function operatorButtonHandler(event) {
     calculationArray.push(stringNumberToPush);
   }
   calculationArray.push(inputtedOperator);
-
-  if (calculationArray.length > 2) {
-    calculationArray.splice(1, 2);
-  }
+  console.log(calculationArray);
 
   stringNumberToPush = '';
-  hasOperator = true;
-  console.log('calculation array', calculationArray)
+  hasDecimal = false;
 }
 
 function equalsButtonHandler(event) {
 
   var answer = null;
   hasDecimal = false;
-  hasOperator = false;
   calculationArray.push(stringNumberToPush);
   stringNumberToPush = '';
   displayArray = [];
+
   console.log(calculationArray);
-
-
-
-  if (calculationResult !== null) {
-    calculationArray[0] = calculationResult;
+  if (calculationArray[2] === '') {
+    calculationArray[2] = calculationArray[0]
     // answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
     answer = calculateArray(calculationArray);
-  } else if (calculationArray[2] === '') {
-    calculationArray[2] = calculationArray[0]
+  } else if (calculationResult !== null) {
+    calculationArray[0] = calculationResult;
     // answer = calculate(calculationArray[0], calculationArray[0], calculationArray[1])
     answer = calculateArray(calculationArray);
   } else {
     // answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
     answer = calculateArray(calculationArray);
   }
-  console.log(answer);
+
   displayArray.push(answer);
   updateDisplay();
   calculationArray = [];
@@ -105,7 +95,6 @@ function equalsButtonHandler(event) {
 
 function updateDisplay() {
   var displayText = displayArray.join('');
-
   $('#display-text').text(displayText);
 }
 
@@ -159,6 +148,7 @@ function calculateArray(array) {
         array.splice(i - 1, 1);
       }
     }
+
     for (var i = 0; i < array.length ; i++) {
       arrayLength = array.length;
       if (array[i] === '+' || array[i] === '/') {
@@ -168,7 +158,7 @@ function calculateArray(array) {
       }
     }
   }
-  console.log(array);
+
   result = calculate(array[0], array[2], array[1]);
   return result;
 }
@@ -179,8 +169,6 @@ function decimalButtonHandler() {
     var inputtedDecimal = $(event.currentTarget).find('p').text();
     stringNumberToPush += inputtedDecimal;
     displayArray.push(inputtedDecimal);
-
-    console.log(stringNumberToPush);
     updateDisplay();
     hasDecimal = true;
   }
@@ -192,7 +180,6 @@ function clearButtonHandler() {
   calculationArray = [];
   updateDisplay();
   hasDecimal = false;
-  hasOperator = false;
 }
 
 function allClearButtonHandler() {
@@ -201,7 +188,6 @@ function allClearButtonHandler() {
   calculationResult = null;
   updateDisplay();
   hasDecimal = false;
-  hasOperator = false;
 }
 
 // var test = calculateArray(['1', '+', '3', '/', '4', '+', '10', '*', '2'])
