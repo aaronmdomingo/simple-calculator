@@ -45,22 +45,35 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
+  inputtedOperator = $(event.currentTarget).find('p').text();
 
+  // if (displayArray.length === 0) {
+  //   return;
+  // }
+  // console.log('Display Array', displayArray);
   if (operatorList.includes(displayArray[displayArray.length-1])) {
-    displayArray.splice(displayArray.length-1, 1);
+    displayArray.pop()
+    calculationArray[1] = inputtedOperator;
+  } else {
+    if (calculationResult !== null) {
+      calculationArray.push(calculationResult);
+    } else {
+      calculationArray.push(stringNumberToPush);
+    }
+    calculationArray.push(inputtedOperator);
   }
 
-  inputtedOperator = $(event.currentTarget).find('p').text();
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  if (calculationResult !== null) {
-    calculationArray.push(calculationResult);
-  } else {
-    calculationArray.push(stringNumberToPush);
-  }
-  calculationArray.push(inputtedOperator);
-  console.log(calculationArray);
+  // if (calculationResult !== null) {
+  //   calculationArray.push(calculationResult);
+  // } else {
+  //   calculationArray.push(stringNumberToPush);
+  // }
+  // calculationArray.push(inputtedOperator);
+
+  // console.log('Calculation Array', calculationArray);
 
   stringNumberToPush = '';
   hasDecimal = false;
@@ -75,18 +88,23 @@ function equalsButtonHandler(event) {
   displayArray = [];
 
   console.log(calculationArray);
-  if (calculationArray[2] === '') {
+  if (calculationArray[0] === '' && calculationArray[2] === '') {
+    calculationArray[0] = 0;
+    calculationArray[2] = 0;
+  } else if (calculationArray[2] === '') {
     calculationArray[2] = calculationArray[0]
     // answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
-    answer = calculateArray(calculationArray);
+  } else if (calculationArray[0] === ''){
+    calculationArray[0] = 0;
   } else if (calculationResult !== null) {
     calculationArray[0] = calculationResult;
     // answer = calculate(calculationArray[0], calculationArray[0], calculationArray[1])
-    answer = calculateArray(calculationArray);
-  } else {
-    // answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
-    answer = calculateArray(calculationArray);
   }
+  // else {
+    // answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
+    // answer = calculateArray(calculationArray);
+  // }
+  answer = calculateArray(calculationArray);
 
   displayArray.push(answer);
   updateDisplay();
@@ -151,7 +169,7 @@ function calculateArray(array) {
 
     for (var i = 0; i < array.length ; i++) {
       arrayLength = array.length;
-      if (array[i] === '+' || array[i] === '/') {
+      if (array[i] === '+' || array[i] === '-') {
         array[i] = calculate(array[i - 1], array[i + 1], array[i]);
         array.splice(i + 1, 1);
         array.splice(i - 1, 1);
