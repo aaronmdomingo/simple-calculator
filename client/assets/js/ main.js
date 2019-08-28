@@ -45,22 +45,35 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
+  inputtedOperator = $(event.currentTarget).find('p').text();
 
+  if (displayArray.length === 0) {
+    return;
+  }
+  
   if (operatorList.includes(displayArray[displayArray.length-1])) {
-    displayArray.splice(displayArray.length-1, 1);
+    displayArray.pop()
+    calculationArray[1] = inputtedOperator;
+  } else {
+    if (calculationResult !== null) {
+      calculationArray.push(calculationResult);
+    } else {
+      calculationArray.push(stringNumberToPush);
+    }
+    calculationArray.push(inputtedOperator);
   }
 
-  inputtedOperator = $(event.currentTarget).find('p').text();
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  if (calculationResult !== null) {
-    calculationArray.push(calculationResult);
-  } else {
-    calculationArray.push(stringNumberToPush);
-  }
-  calculationArray.push(inputtedOperator);
-  console.log(calculationArray);
+  // if (calculationResult !== null) {
+  //   calculationArray.push(calculationResult);
+  // } else {
+  //   calculationArray.push(stringNumberToPush);
+  // }
+  // calculationArray.push(inputtedOperator);
+  console.log('Display Array', displayArray);
+  console.log('Calculation Array', calculationArray);
 
   stringNumberToPush = '';
   hasDecimal = false;
