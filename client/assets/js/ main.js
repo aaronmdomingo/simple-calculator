@@ -88,7 +88,10 @@ function equalsButtonHandler(event) {
   displayArray = [];
 
   console.log(calculationArray);
-  if (calculationArray[2] === '') {
+  if (calculationArray[0] === '' && calculationArray[2] === '') {
+    calculationArray[0] = 0;
+    calculationArray[2] = 0;
+  } else if (calculationArray[2] === '') {
     calculationArray[2] = calculationArray[0]
     // answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
   } else if (calculationArray[0] === ''){
@@ -166,7 +169,7 @@ function calculateArray(array) {
 
     for (var i = 0; i < array.length ; i++) {
       arrayLength = array.length;
-      if (array[i] === '+' || array[i] === '/') {
+      if (array[i] === '+' || array[i] === '-') {
         array[i] = calculate(array[i - 1], array[i + 1], array[i]);
         array.splice(i + 1, 1);
         array.splice(i - 1, 1);
