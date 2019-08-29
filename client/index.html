@@ -5,11 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 </head>
 <body>
 
+    <div class="main">
+        <div class="calculator__Border">
+            <div class="calculator__Container">
+                <div class="screen__Container">
+                    <div class="screen__Container-text" id="display-text">
+                        Hello
+                    </div>
+                </div>
+                <div class="buttons__Container-main">
+                    <div class="buttons__Container-sub">
+                        <div class="calculator__Button ac" id="ac-button">AC</div>
+                        <div class="calculator__Button">+/-</div>
+                        <div class="calculator__Button">%</div>
+                        <div class="calculator__Button operator">÷</div>
+                        <div class="calculator__Button number">7</div>
+                        <div class="calculator__Button number">8</div>
+                        <div class="calculator__Button number">9</div>
+                        <div class="calculator__Button operator">x</div>
+                        <div class="calculator__Button number">4</div>
+                        <div class="calculator__Button number">5</div>
+                        <div class="calculator__Button number">6</div>
+                        <div class="calculator__Button operator">-</div>
+                        <div class="calculator__Button number">1</div>
+                        <div class="calculator__Button number">2</div>
+                        <div class="calculator__Button number">3</div>
+                        <div class="calculator__Button operator">+</div>
+                        <div class="calculator__Button zero number">0</div>
+                        <div class="calculator__Button" id="decimal">.</div>
+                        <div class="calculator__Button equals" id="equals">=</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--
     <main class="calculator-body">
         <div class="display-container">
             <p id="display-text" class="display-text center"></p>
@@ -74,9 +113,8 @@
                 <p class="center">+</p>
             </div>
         </div>
-
-
     </main>
+    -->
     <script src="assets/js/ main.js"></script>
 </body>
 </html>
