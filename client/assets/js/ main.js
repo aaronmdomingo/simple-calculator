@@ -7,9 +7,10 @@ var stringNumberToPush = '';
 var calculationResult = null;
 var hasDecimal = false;
 var operatorList = '÷+-x';
+var lastOperator = null;
+var lastNumber = null;
 
 function initializeApp() {
-  $('.center').css('pointer-events', 'none'); //For testing only
 
   applyClickHandlers();
 }
@@ -29,6 +30,13 @@ function applyClickHandlers() {
 
   $('#ac-button').click(allClearButtonHandler);
 
+  $('#oppositeSign').click(oppositeSignHandler);
+
+  $('#percentage').click(percentageHandler);
+
+  $('#moon').click(nightMode);
+
+  $('#sun').click(dayMode);
 }
 
 function numberButtonHandler(event) {
@@ -44,7 +52,6 @@ function numberButtonHandler(event) {
   stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
   updateDisplay();
-  console.log(calculationArray);
 }
 
 function operatorButtonHandler(event) {
@@ -52,9 +59,10 @@ function operatorButtonHandler(event) {
   // inputtedOperator = $(event.currentTarget).find('p').text();
   inputtedOperator = $(event.currentTarget).text();
 
-  if (displayArray.length === 0) {
-    return;
-  }
+
+  // if (displayArray.length === 0) {
+  //   return;
+  // }
   // console.log('Display Array', displayArray);
   if (operatorList.includes(displayArray[displayArray.length-1])) {
     displayArray.pop()
@@ -79,8 +87,7 @@ function operatorButtonHandler(event) {
   // calculationArray.push(inputtedOperator);
 
   // console.log('Calculation Array', calculationArray);
-  console.log(displayArray);
-  console.log('calculation Array', calculationArray);
+  console.log(calculationArray);
   stringNumberToPush = '';
   hasDecimal = false;
 }
@@ -93,14 +100,26 @@ function equalsButtonHandler(event) {
   stringNumberToPush = '';
   displayArray = [];
 
+  // console.log(displayArray);
+  // if (displayArray.length ===) {
+  //   calculationArray[0] = 0;
+  // }
+
   console.log(calculationArray);
-  if (calculationArray[0] === '' && calculationArray[2] === '' || calculationArray[0] === '.' && calculationArray[2] === '.') {
+  if (calculationArray[0] === '' && calculationArray.length === 1) {
+    calculationArray[0] = calculationResult;
+    calculationArray[1] = lastOperator;
+    calculationArray[2] = lastNumber;
+  }
+
+  if (calculationArray[0] === '' && calculationArray[2] === '' || calculationArray[0] === '.' && calculationArray[2] === '.' || calculationArray[0] === '.' && calculationArray[calculationArray.length-1] === '') {
     calculationArray[0] = 0;
     calculationArray[2] = 0;
-  } else if (calculationArray[2] === '') {
-    calculationArray[2] = calculationArray[0]
-    // answer = calculate(calculationResult, calculationArray[2], calculationArray[1]);
-  } else if (calculationArray[0] === '' || calculationArray[0] === '.' || ){
+  } else if (calculationArray[calculationArray.length-1] === '') {
+    var tempAnswer = calculateArray(calculationArray.splice(0, calculationArray.length - 2));
+    calculationArray.splice(0, calculationArray.length-2, tempAnswer);
+    calculationArray[calculationArray.length-1] = tempAnswer;
+  } else if (calculationArray[0] === '' || calculationArray[0] === '.' || calculationArray[0] === 'Error'){
     calculationArray[0] = 0;
   } else if (calculationResult !== null) {
     calculationArray[0] = calculationResult;
@@ -110,6 +129,8 @@ function equalsButtonHandler(event) {
     // answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
     // answer = calculateArray(calculationArray);
   // }
+  lastOperator = calculationArray[1];
+  lastNumber = calculationArray[2];
   answer = calculateArray(calculationArray);
 
   displayArray.push(answer);
@@ -144,7 +165,7 @@ function calculate(num1, num2, operator=0) {
       result = number1 / number2;
       break;
     default:
-      console.log(`I can't compute this!`)
+      result = 0;
       break;
   }
 
@@ -215,5 +236,66 @@ function allClearButtonHandler() {
   stringNumberToPush = '';
 }
 
-// var test = calculateArray(['1', '+', '3', '/', '4', '+', '10', '*', '2'])
-// console.log(test);
+function oppositeSignHandler() {
+  var currentNum;
+
+  if (isNaN(displayArray[displayArray.length - 1])) {
+    return;
+  }
+
+  if (displayArray.length === 0 || displayArray[0] === '.') {
+    currentNum = 0;
+  } else if (calculationResult !== null) {
+    currentNum = calculationResult*-1
+  } else {
+    currentNum = parseInt(displayArray.join('')) * -1;
+  }
+
+
+  displayArray.splice(0, displayArray.length, currentNum);
+  stringNumberToPush = currentNum;
+  calculationResult = currentNum;
+  updateDisplay();
+}
+
+function percentageHandler() {
+  var percentageNum;
+  // console.log(displayArray);
+  // console.log(calculationArray);
+
+  if (isNaN(displayArray[displayArray.length-1])) {
+    return;
+  }
+
+  if (displayArray.length === 0 || displayArray[0] === '.') {
+    percentageNum = 0;
+  } else if (calculationResult !== null) {
+    percentageNum = calculationResult/100;
+  } else {
+    percentageNum = parseInt(displayArray.join('')) / 100;
+  }
+
+
+  displayArray.splice(0, displayArray.length, percentageNum);
+  stringNumberToPush = percentageNum;
+  calculationResult = percentageNum;
+  updateDisplay();
+}
+
+function nightMode() {
+  $('ion-icon').addClass('colorBlack');
+  $('.main').addClass('backgroundBlack').addClass('colorWhite');
+  $('.calculator__Button').addClass('buttonBlack');
+  $('.operator').addClass('buttonOrange');
+  $('.equals').addClass('buttonOrange');
+  $('.screen__Container-text').addClass('colorOrange');
+}
+
+function dayMode() {
+  $('ion-icon').removeClass('colorBlack');
+  $('.main').removeClass('backgroundBlack').removeClass('colorWhite');
+  $('.calculator__Button').removeClass('buttonBlack');
+  $('.operator').removeClass('buttonOrange');
+  $('.equals').removeClass('buttonOrange');
+  $('.screen__Container-text').removeClass('colorOrange');
+}
