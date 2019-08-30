@@ -245,6 +245,8 @@ function oppositeSignHandler() {
 
   if (displayArray.length === 0 || displayArray[0] === '.') {
     currentNum = 0;
+  } else if (operatorList.includes(displayArray[0])) {
+    currentNum = parseInt(displayArray.splice(1))*-1;
   } else if (calculationResult !== null) {
     currentNum = calculationResult*-1
   } else {
@@ -259,6 +261,8 @@ function oppositeSignHandler() {
 }
 
 function percentageHandler() {
+  console.log(calculationArray);
+  console.log(displayArray);
   var percentageNum;
   // console.log(displayArray);
   // console.log(calculationArray);
@@ -269,6 +273,8 @@ function percentageHandler() {
 
   if (displayArray.length === 0 || displayArray[0] === '.') {
     percentageNum = 0;
+  } else if (operatorList.includes(displayArray[0])) {
+    percentageNum = parseInt(displayArray.splice(1)) / 100;
   } else if (calculationResult !== null) {
     percentageNum = calculationResult/100;
   } else {
