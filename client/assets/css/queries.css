@@ -1,0 +1,69 @@
+/* big tablets to 1200 pixels */
+@media only screen and (max-width: 1200px) {
+  html {
+    font-size: 75%;
+  }
+
+  .calculator__Border {
+    height: 65%;
+    width: 50%;
+  }
+}
+
+/* Small tablets to big tablets from 768 - 1023 pixels */
+@media only screen and (max-width: 1023px) {
+  html {
+    font-size: 70%;
+  }
+
+  .calculator__Border {
+    height: 70%;
+    width: 60%;
+  }
+}
+
+/* Phone smallers than an iPad 481 - 767 pixels */
+@media only screen and (max-width: 767px) {
+  html {
+    font-size: 65%;
+  }
+
+  .calculator__Border {
+    height: 75%;
+    width: 60%;
+  }
+
+}
+
+/* @media only screen and (max-width: 650px) {
+  html {
+    font-size: 37.5%;
+  }
+
+} */
+
+/* Small Phones from 0-480 pixels */
+@media only screen and (max-width: 480px) {
+  html {
+    font-size: 60%
+  }
+
+  .calculator__Border {
+    height: 55%;
+    width: 60%;
+  }
+
+}
+
+/* Small Phones from 0-480 pixels */
+@media only screen and (max-width: 375px) {
+  html {
+    font-size: 55%
+  }
+
+  .calculator__Border {
+    height: 60%;
+    width: 65%;
+  }
+
+}

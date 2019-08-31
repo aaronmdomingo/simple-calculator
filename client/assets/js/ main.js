@@ -16,10 +16,8 @@ function initializeApp() {
 }
 
 function applyClickHandlers() {
-  // $('#number-block').on('click', '.number', numberButtonHandler);
   $('.number').click(numberButtonHandler);
 
-  // $('#operator-column').on('click', '.operator', operatorButtonHandler);
   $('.operator').click(operatorButtonHandler);
 
   $('#equals').click(equalsButtonHandler);
@@ -41,7 +39,7 @@ function applyClickHandlers() {
 
 function numberButtonHandler(event) {
   var inputtedNumber = '';
-  // inputtedNumber = $(event.currentTarget).find('p').text();
+
   inputtedNumber = $(event.currentTarget).text();
 
   if (calculationResult !== null) {
@@ -56,14 +54,9 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
-  // inputtedOperator = $(event.currentTarget).find('p').text();
+
   inputtedOperator = $(event.currentTarget).text();
 
-
-  // if (displayArray.length === 0) {
-  //   return;
-  // }
-  // console.log('Display Array', displayArray);
   if (operatorList.includes(displayArray[displayArray.length-1])) {
     displayArray.pop()
     calculationArray[1] = inputtedOperator;
@@ -79,14 +72,6 @@ function operatorButtonHandler(event) {
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  // if (calculationResult !== null) {
-  //   calculationArray.push(calculationResult);
-  // } else {
-  //   calculationArray.push(stringNumberToPush);
-  // }
-  // calculationArray.push(inputtedOperator);
-
-  // console.log('Calculation Array', calculationArray);
   console.log(calculationArray);
   stringNumberToPush = '';
   hasDecimal = false;
@@ -99,11 +84,6 @@ function equalsButtonHandler(event) {
   calculationArray.push(stringNumberToPush);
   stringNumberToPush = '';
   displayArray = [];
-
-  // console.log(displayArray);
-  // if (displayArray.length ===) {
-  //   calculationArray[0] = 0;
-  // }
 
   console.log(calculationArray);
   if (calculationArray[0] === '' && calculationArray.length === 1) {
@@ -123,12 +103,9 @@ function equalsButtonHandler(event) {
     calculationArray[0] = 0;
   } else if (calculationResult !== null) {
     calculationArray[0] = calculationResult;
-    // answer = calculate(calculationArray[0], calculationArray[0], calculationArray[1])
+
   }
-  // else {
-    // answer = calculate(calculationArray[0], calculationArray[2], calculationArray[1]);
-    // answer = calculateArray(calculationArray);
-  // }
+
   lastOperator = calculationArray[1];
   lastNumber = calculationArray[2];
   answer = calculateArray(calculationArray);
@@ -264,8 +241,7 @@ function percentageHandler() {
   console.log(calculationArray);
   console.log(displayArray);
   var percentageNum;
-  // console.log(displayArray);
-  // console.log(calculationArray);
+
 
   if (isNaN(displayArray[displayArray.length-1])) {
     return;
