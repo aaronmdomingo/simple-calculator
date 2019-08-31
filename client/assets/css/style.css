@@ -172,6 +172,20 @@ body {
 .screen__Switcher {
     height: 20%;
     width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 1.25rem;
+}
+
+.screen__Name {
+    display: flex;
+}
+
+.screen__Wifi {
+    font-size: 1.5rem;
+    margin-left: 2px;
 }
 
 
