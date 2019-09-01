@@ -181,6 +181,7 @@ body {
 
 .screen__Name {
     display: flex;
+    color: #000000;
 }
 
 .screen__Wifi {

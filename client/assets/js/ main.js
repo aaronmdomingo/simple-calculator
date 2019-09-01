@@ -24,8 +24,6 @@ function applyClickHandlers() {
 
   $('#decimal').click(decimalButtonHandler);
 
-  $('#c-button').click(clearButtonHandler);
-
   $('#ac-button').click(allClearButtonHandler);
 
   $('#oppositeSign').click(oppositeSignHandler);
@@ -35,6 +33,7 @@ function applyClickHandlers() {
   $('#moon').click(nightMode);
 
   $('#sun').click(dayMode);
+
 }
 
 function numberButtonHandler(event) {
@@ -44,11 +43,14 @@ function numberButtonHandler(event) {
 
   if (calculationResult !== null) {
     calculationResult = null;
-    displayArray=[];
+    if (!operatorList.includes(displayArray[displayArray.length-1])) {
+      displayArray = [];
+    }
   }
 
   stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
+
   updateDisplay();
 }
 
@@ -72,24 +74,26 @@ function operatorButtonHandler(event) {
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  console.log(calculationArray);
   stringNumberToPush = '';
   hasDecimal = false;
 }
 
 function equalsButtonHandler(event) {
-
   var answer = null;
   hasDecimal = false;
   calculationArray.push(stringNumberToPush);
   stringNumberToPush = '';
   displayArray = [];
 
-  console.log(calculationArray);
   if (calculationArray[0] === '' && calculationArray.length === 1) {
-    calculationArray[0] = calculationResult;
-    calculationArray[1] = lastOperator;
-    calculationArray[2] = lastNumber;
+    if (calculationResult === null) {
+      calculationArray[0] = 0;
+      calculationArray[2] = 0;
+    } else {
+      calculationArray[0] = calculationResult;
+      calculationArray[1] = lastOperator;
+      calculationArray[2] = lastNumber;
+    }
   }
 
   if (calculationArray[0] === '' && calculationArray[2] === '' || calculationArray[0] === '.' && calculationArray[2] === '.' || calculationArray[0] === '.' && calculationArray[calculationArray.length-1] === '') {
@@ -103,7 +107,6 @@ function equalsButtonHandler(event) {
     calculationArray[0] = 0;
   } else if (calculationResult !== null) {
     calculationArray[0] = calculationResult;
-
   }
 
   lastOperator = calculationArray[1];
@@ -117,6 +120,13 @@ function equalsButtonHandler(event) {
 
 function updateDisplay() {
   var displayText = displayArray.join('');
+
+  if (displayText.length > 0) {
+    $('.ac').text('C');
+  } else {
+    $('.ac').text('AC');
+  }
+
   $('#display-text').text(displayText);
 }
 
@@ -205,9 +215,11 @@ function clearButtonHandler() {
 }
 
 function allClearButtonHandler() {
+  if (displayArray.length === 0) {
+    calculationResult = null;
+  }
   displayArray = [];
   calculationArray = [];
-  calculationResult = null;
   updateDisplay();
   hasDecimal = false;
   stringNumberToPush = '';
@@ -266,6 +278,7 @@ function percentageHandler() {
 
 function nightMode() {
   $('ion-icon').addClass('colorBlack');
+  $('.screen__Name').addClass('colorBlack');
   $('.main').addClass('backgroundBlack').addClass('colorWhite');
   $('.calculator__Button').addClass('buttonBlack');
   $('.operator').addClass('buttonOrange');
@@ -275,6 +288,7 @@ function nightMode() {
 
 function dayMode() {
   $('ion-icon').removeClass('colorBlack');
+  $('.screen__Name').removeClass('colorBlack');
   $('.main').removeClass('backgroundBlack').removeClass('colorWhite');
   $('.calculator__Button').removeClass('buttonBlack');
   $('.operator').removeClass('buttonOrange');
