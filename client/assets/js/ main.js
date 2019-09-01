@@ -35,6 +35,7 @@ function applyClickHandlers() {
   $('#moon').click(nightMode);
 
   $('#sun').click(dayMode);
+
 }
 
 function numberButtonHandler(event) {
@@ -49,6 +50,7 @@ function numberButtonHandler(event) {
 
   stringNumberToPush += inputtedNumber;
   displayArray.push(inputtedNumber);
+
   updateDisplay();
 }
 
@@ -85,11 +87,15 @@ function equalsButtonHandler(event) {
   stringNumberToPush = '';
   displayArray = [];
 
-  console.log(calculationArray);
   if (calculationArray[0] === '' && calculationArray.length === 1) {
-    calculationArray[0] = calculationResult;
-    calculationArray[1] = lastOperator;
-    calculationArray[2] = lastNumber;
+    if (calculationResult === null) {
+      calculationArray[0] = 0;
+      calculationArray[2] = 0;
+    } else {
+      calculationArray[0] = calculationResult;
+      calculationArray[1] = lastOperator;
+      calculationArray[2] = lastNumber;
+    }
   }
 
   if (calculationArray[0] === '' && calculationArray[2] === '' || calculationArray[0] === '.' && calculationArray[2] === '.' || calculationArray[0] === '.' && calculationArray[calculationArray.length-1] === '') {
@@ -117,6 +123,7 @@ function equalsButtonHandler(event) {
 
 function updateDisplay() {
   var displayText = displayArray.join('');
+
   $('#display-text').text(displayText);
 }
 
@@ -266,6 +273,7 @@ function percentageHandler() {
 
 function nightMode() {
   $('ion-icon').addClass('colorBlack');
+  $('.screen__Name').addClass('colorBlack');
   $('.main').addClass('backgroundBlack').addClass('colorWhite');
   $('.calculator__Button').addClass('buttonBlack');
   $('.operator').addClass('buttonOrange');
@@ -275,6 +283,7 @@ function nightMode() {
 
 function dayMode() {
   $('ion-icon').removeClass('colorBlack');
+  $('.screen__Name').removeClass('colorBlack');
   $('.main').removeClass('backgroundBlack').removeClass('colorWhite');
   $('.calculator__Button').removeClass('buttonBlack');
   $('.operator').removeClass('buttonOrange');
