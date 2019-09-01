@@ -24,8 +24,6 @@ function applyClickHandlers() {
 
   $('#decimal').click(decimalButtonHandler);
 
-  $('#c-button').click(clearButtonHandler);
-
   $('#ac-button').click(allClearButtonHandler);
 
   $('#oppositeSign').click(oppositeSignHandler);
@@ -45,7 +43,9 @@ function numberButtonHandler(event) {
 
   if (calculationResult !== null) {
     calculationResult = null;
-    displayArray=[];
+    if (!operatorList.includes(displayArray[displayArray.length-1])) {
+      displayArray = [];
+    }
   }
 
   stringNumberToPush += inputtedNumber;
@@ -56,6 +56,7 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
+  console.log(calculationArray);
 
   inputtedOperator = $(event.currentTarget).text();
 
@@ -80,7 +81,6 @@ function operatorButtonHandler(event) {
 }
 
 function equalsButtonHandler(event) {
-
   var answer = null;
   hasDecimal = false;
   calculationArray.push(stringNumberToPush);
@@ -109,7 +109,6 @@ function equalsButtonHandler(event) {
     calculationArray[0] = 0;
   } else if (calculationResult !== null) {
     calculationArray[0] = calculationResult;
-
   }
 
   lastOperator = calculationArray[1];
@@ -123,7 +122,11 @@ function equalsButtonHandler(event) {
 
 function updateDisplay() {
   var displayText = displayArray.join('');
-
+  if (displayText.length > 0) {
+    $('.ac').text('C');
+  } else {
+    $('.ac').text('AC');
+  }
   $('#display-text').text(displayText);
 }
 
@@ -212,9 +215,11 @@ function clearButtonHandler() {
 }
 
 function allClearButtonHandler() {
+  if (displayArray.length === 0) {
+    calculationResult = null;
+  }
   displayArray = [];
   calculationArray = [];
-  calculationResult = null;
   updateDisplay();
   hasDecimal = false;
   stringNumberToPush = '';
