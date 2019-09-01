@@ -56,7 +56,6 @@ function numberButtonHandler(event) {
 
 function operatorButtonHandler(event) {
   var inputtedOperator = '';
-  console.log(calculationArray);
 
   inputtedOperator = $(event.currentTarget).text();
 
@@ -75,7 +74,6 @@ function operatorButtonHandler(event) {
   displayArray.push(inputtedOperator);
   updateDisplay();
 
-  console.log(calculationArray);
   stringNumberToPush = '';
   hasDecimal = false;
 }
@@ -122,11 +120,13 @@ function equalsButtonHandler(event) {
 
 function updateDisplay() {
   var displayText = displayArray.join('');
+
   if (displayText.length > 0) {
     $('.ac').text('C');
   } else {
     $('.ac').text('AC');
   }
+
   $('#display-text').text(displayText);
 }
 
