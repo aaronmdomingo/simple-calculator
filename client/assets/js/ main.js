@@ -1,6 +1,5 @@
 $(document).ready(initializeApp);
 
-
 var calculationArray = [];
 var displayArray = [];
 var stringNumberToPush = '';
@@ -204,14 +203,6 @@ function decimalButtonHandler() {
     updateDisplay();
     hasDecimal = true;
   }
-}
-
-
-function clearButtonHandler() {
-  displayArray = [];
-  calculationArray = [];
-  updateDisplay();
-  hasDecimal = false;
 }
 
 function allClearButtonHandler() {
