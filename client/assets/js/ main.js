@@ -42,7 +42,7 @@ function numberButtonHandler(event) {
 
   if (calculationResult !== null) {
     calculationResult = null;
-    if (!operatorList.includes(displayArray[displayArray.length-1])) {
+    if (!operatorList.includes(displayArray[displayArray.length-1]) && displayArray[displayArray.length-1] !== '.') {
       displayArray = [];
     }
   }
