@@ -5,7 +5,7 @@
   }
 
   .calculator__Border {
-    height: 65%;
+    height: 75rem;
     width: 50%;
   }
 }
@@ -17,7 +17,7 @@
   }
 
   .calculator__Border {
-    height: 70%;
+    height: 70rem;
     width: 60%;
   }
 }
@@ -29,7 +29,7 @@
   }
 
   .calculator__Border {
-    height: 75%;
+    height: 65rem;
     width: 60%;
   }
 
@@ -49,8 +49,8 @@
   }
 
   .calculator__Border {
-    height: 55%;
-    width: 60%;
+    height: 60rem;
+    width: 70%;
   }
 
 }
@@ -62,8 +62,8 @@
   }
 
   .calculator__Border {
-    height: 60%;
-    width: 65%;
+    height: 55rem;
+    width: 70%;
   }
 
 }

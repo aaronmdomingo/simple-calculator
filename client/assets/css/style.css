@@ -118,7 +118,7 @@ body {
 }
 
 .main {
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     background-color: white;
     color: #000000;
@@ -127,7 +127,6 @@ body {
     justify-content: center;
     align-items: center;
     background-image: url("/client/assets/images/white-background.jpg");
-    /* background-image: url('/client/assets/images/black-background.png'); */
     background-position: center;
     background-size: cover;
 
@@ -135,9 +134,9 @@ body {
 }
 
 .calculator__Border {
-    height: 60%;
+    height: 80rem;
     width: 35%;
-
+    margin: 1rem;
     background-color: black;
     border: 5px solid black;
     border-radius: 25px;
