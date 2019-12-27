@@ -186,24 +186,20 @@ function calculate(num1, num2, operator=0) {
 }
 
 function calculateArray(array) {
-  var arrayLength = array.length;
-
-  while (arrayLength > 3) {
+  while (array.length > 3) {
     for (var i = 0; i < array.length; i++) {
-      arrayLength = array.length;
-      if (array[i] === 'x' || array[i] === '÷') {
-        array[i] = calculate(array[i - 1], array[i + 1], array[i]);
-        array.splice(i + 1, 1);
-        array.splice(i - 1, 1);
+      if (array[i] === 'x') {
+        array.splice(i - 1, 3, calculate(array[i - 1], array[i + 1], array[i]));
+      }
+      if (array[i] === '÷') {
+        array.splice(i - 1, 3, calculate(array[i - 1], array[i + 1], array[i]));
       }
     }
 
     for (var i = 0; i < array.length ; i++) {
-      arrayLength = array.length;
       if (array[i] === '+' || array[i] === '-') {
         array[i] = calculate(array[i - 1], array[i + 1], array[i]);
-        array.splice(i + 1, 1);
-        array.splice(i - 1, 1);
+        array.splice(i - 1, 3, array[i]);
       }
     }
   }
