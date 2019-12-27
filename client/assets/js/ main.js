@@ -16,7 +16,8 @@ function initializeApp() {
   var storage = localStorage.getItem('mode');
   if (storage === 'day-mode') {
     dayMode();
-  } else {
+  }
+  if (storage === 'night-mode') {
     nightMode();
   }
 }
