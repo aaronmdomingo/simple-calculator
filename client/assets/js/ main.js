@@ -12,6 +12,13 @@ var lastNumber = null;
 function initializeApp() {
 
   applyClickHandlers();
+
+  var storage = localStorage.getItem('mode');
+  if (storage === 'day-mode') {
+    dayMode();
+  } else {
+    nightMode();
+  }
 }
 
 function applyClickHandlers() {
@@ -244,7 +251,6 @@ function oppositeSignHandler() {
     currentNum = parseInt(displayArray.join('')) * -1;
   }
 
-
   displayArray.splice(0, displayArray.length, currentNum);
   stringNumberToPush = currentNum;
   calculationResult = currentNum;
@@ -268,7 +274,6 @@ function percentageHandler() {
     percentageNum = parseInt(displayArray.join('')) / 100;
   }
 
-
   displayArray.splice(0, displayArray.length, percentageNum);
   stringNumberToPush = percentageNum;
   calculationResult = percentageNum;
@@ -276,6 +281,7 @@ function percentageHandler() {
 }
 
 function nightMode() {
+  localStorage.setItem('mode', 'night-mode');
   $('ion-icon').addClass('colorBlack');
   $('.screen__Name').addClass('colorBlack');
   $('.main').addClass('backgroundBlack').addClass('colorWhite');
@@ -286,6 +292,7 @@ function nightMode() {
 }
 
 function dayMode() {
+  localStorage.setItem('mode', 'day-mode');
   $('ion-icon').removeClass('colorBlack');
   $('.screen__Name').removeClass('colorBlack');
   $('.main').removeClass('backgroundBlack').removeClass('colorWhite');
