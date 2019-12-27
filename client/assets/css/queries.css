@@ -1,9 +1,5 @@
 /* big tablets to 1200 pixels */
 @media only screen and (max-width: 1200px) {
-  html {
-    font-size: 75%;
-  }
-
   .calculator__Border {
     height: 75rem;
     width: 50%;
@@ -12,10 +8,6 @@
 
 /* Small tablets to big tablets from 768 - 1023 pixels */
 @media only screen and (max-width: 1023px) {
-  html {
-    font-size: 70%;
-  }
-
   .calculator__Border {
     height: 70rem;
     width: 60%;
