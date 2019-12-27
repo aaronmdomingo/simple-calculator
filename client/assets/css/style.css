@@ -23,7 +23,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("/client/assets/images/white-background.jpg");
+    background-image: url("../images/white-background.jpg");
     background-position: center;
     background-size: cover;
     transition: 0.2s;
@@ -176,7 +176,7 @@ ion-icon:active {
 }
 
 .backgroundBlack {
-    background-image: url('/client/assets/images/black-background.png');
+    background-image: url('../images/black-background.png');
 }
 
 .buttonOrange {
