@@ -95,7 +95,9 @@ function equalsButtonHandler(event) {
     }
   }
 
-  if (calculationArray[0] === '' && calculationArray[2] === '' || calculationArray[0] === '.' && calculationArray[2] === '.' || calculationArray[0] === '.' && calculationArray[calculationArray.length-1] === '') {
+  if (calculationArray[0] === '' && calculationArray[2] === ''
+  || calculationArray[0] === '.' && calculationArray[2] === '.'
+  || calculationArray[0] === '.' && calculationArray[calculationArray.length-1] === '') {
     calculationArray[0] = 0;
     calculationArray[2] = 0;
   } else if (calculationArray[calculationArray.length-1] === '') {
@@ -112,7 +114,16 @@ function equalsButtonHandler(event) {
   lastNumber = calculationArray[2];
   answer = calculateArray(calculationArray);
 
-  displayArray.push(answer);
+  if (answer.toString().split('').includes('.')) {
+    if (answer.toString().split('.')[1].length > 3) {
+      displayArray.push(answer.toFixed(2));
+    } else {
+      displayArray.push(answer);
+    }
+  } else {
+    displayArray.push(answer);
+  }
+
   updateDisplay();
   calculationArray = [];
 }
@@ -241,10 +252,7 @@ function oppositeSignHandler() {
 }
 
 function percentageHandler() {
-  console.log(calculationArray);
-  console.log(displayArray);
   var percentageNum;
-
 
   if (isNaN(displayArray[displayArray.length-1])) {
     return;
