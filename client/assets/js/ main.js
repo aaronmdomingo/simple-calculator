@@ -9,17 +9,16 @@ var operatorList = '÷+-x';
 var lastOperator = null;
 var lastNumber = null;
 
+var storage = localStorage.getItem('mode');
+if (storage === 'day-mode') {
+  dayMode();
+}
+if (storage === 'night-mode') {
+  nightMode();
+}
+
 function initializeApp() {
-
   applyClickHandlers();
-
-  var storage = localStorage.getItem('mode');
-  if (storage === 'day-mode') {
-    dayMode();
-  }
-  if (storage === 'night-mode') {
-    nightMode();
-  }
 }
 
 function applyClickHandlers() {
