@@ -1,105 +1,3 @@
-/*
-body {
-    height: 100vh;
-
-}
-body * {
-    box-sizing: border-box;
-}
-
-.calculator-body {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 70%;
-    width: 30%;
-    background-color: lavender;
-}
-.display-text {
-    text-align: right;
-    width: 98%;
-}
-.display-container {
-    position: relative;
-    top: 25px;
-    display: inline-block;
-    height: 15%;
-    width: 85%;
-    background-color: peachpuff;
-    left: 7.5%;
-    overflow: scroll;
-}
-
-.c-button-containers {
-    display: inline-block;
-    position: relative;
-    top: 28px;
-    left: 7.5%;
-    height: 15%;
-    width: 85%;
-    background-color: chartreuse;
-}
-.c-button, .ac-button {
-    position: relative;
-    top: 50%;
-    left: 26%;
-    transform: translate(-50%, -50%);
-    height: 75%;
-    width: 45%;
-    display: inline-block;
-    background-color: rebeccapurple;
-    margin: 0px;
-}
-
-.number-block {
-    display: inline-block;
-    position: relative;
-    height: 60%;
-    width: 60%;
-    background-color: chartreuse;
-    top: 28px;
-    left: 7.5%;
-    margin-top: 8px;
-    vertical-align: top;
-}
-.number, .decimal, .equals {
-    position: relative;
-    display: inline-block;
-    height: 23%;
-    width: 32%;
-    left: 2px;
-    margin-top: 3px;
-    background-color: hotpink;
-}
-.operator-column {
-    position: relative;
-    display: inline-block;
-    height: 60%;
-    width: 24%;
-    background-color: chartreuse;
-    top: 36px;
-    left: 7.5%;
-}
-.operator {
-    position: relative;
-    margin-top: 3px;
-    height: 24%;
-    background-color: cornflowerblue;
-}
-.center {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    margin: 0;
-}
-
-p {
-    font-size: 3rem;
-}
-*/
-
 *,
 *::after,
 *::before {
@@ -122,14 +20,12 @@ body {
     width: 100vw;
     background-color: white;
     color: #000000;
-
     display: flex;
     justify-content: center;
     align-items: center;
     background-image: url("/client/assets/images/white-background.jpg");
     background-position: center;
     background-size: cover;
-
     transition: 0.2s;
 }
 
@@ -141,7 +37,6 @@ body {
     border: 5px solid black;
     border-radius: 25px;
     box-shadow: 5px 5px 5px 5px rgba(0,0,0,.2);
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -150,11 +45,9 @@ body {
 .calculator__Container {
     height: 95%;
     width: 97%;
-
     background-color: rgb(215, 215, 215);
     border: 5px solid rgb(215, 215, 215);
     border-radius: 25px;
-
     display: flex;
     flex-direction: column;
 }
@@ -165,13 +58,11 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
 }
 
 .screen__Switcher {
     height: 20%;
     width: 100%;
-
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
@@ -188,14 +79,11 @@ body {
     margin-left: 2px;
 }
 
-
 .screen__Icons {
     font-size: 2rem;
-
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
 }
 
 ion-icon {
@@ -220,15 +108,12 @@ ion-icon:active {
     justify-content: center;
     align-items: center;
     position: relative;
-
-
-    overflow: scroll;
+    overflow-x: auto;
     transition: 0.2s;
 }
 
 .buttons__Container-main {
     height: 65%;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -238,8 +123,6 @@ ion-icon:active {
 .buttons__Container-sub {
     height: 95%;
     width: 98%;
-
-
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(4, 1fr);
@@ -250,11 +133,9 @@ ion-icon:active {
     background-color: #fff;
     border-radius: 5px;
     cursor: pointer;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 3rem;
     transition: all 0.2s;
 }
